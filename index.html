@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktyka — Це. Хто це? Що це? Він / вона / воно / вони</title>
+<style>
+  :root {
+    --website-blue: #0057B7;
+    --website-blue-dark: #004494;
+    --website-blue-pale: #EAF3FF;
+    --website-yellow: #FFD500;
+    --website-yellow-soft: #FFF3A6;
+    --website-yellow-pale: #FFF9D9;
+    --website-teal: #0B8EA3;
+
+    --warm-page: #F4F2EC;
+    --warm-card: #FFFFFF;
+    --warm-card-2: #F8F6F0;
+
+    --ink: #073A73;
+    --muted: #4D4D4D;
+    --line: #8CB4E8;
+
+    --berry: var(--website-blue);
+    --rose: var(--website-blue);
+    --cream: var(--warm-page);
+    --gold: var(--website-yellow);
+    --gold-pale: var(--website-yellow-pale);
+    --green-ok: var(--website-blue-dark);
+    --green-pale: var(--website-blue-pale);
+
+    --header-font: Arial, Helvetica, sans-serif;
+    --body-font: Arial, Helvetica, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body-font);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.55;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 30px 24px 60px; }
+
+  /* HEADER */
+  header.intro {
+    background: var(--website-blue);
+    color: white;
+    padding: 36px 32px;
+    border-radius: 0 0 14px 14px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 0 var(--website-yellow);
+  }
+  header.intro::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 8px; height: 50%; background: var(--website-teal);
+  }
+  header.intro::after {
+    content: ''; position: absolute; top: 50%; left: 0;
+    width: 8px; height: 50%; background: var(--website-yellow);
+  }
+  header.intro .kicker {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--website-yellow); font-weight: 700; margin-bottom: 10px;
+  }
+  header.intro h1 { font-size: 38px; line-height: 1.1; margin-bottom: 8px; }
+  header.intro .subtitle {
+    font-style: italic; font-size: 18px;
+    color: rgba(255,255,255,0.85); margin-bottom: 20px;
+  }
+  header.intro .meta {
+    display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    border-top: 1px solid rgba(255,255,255,0.2); padding-top: 14px;
+  }
+  header.intro .meta strong { color: var(--website-yellow); font-weight: 600; }
+
+  /* LEAD */
+  .lead-blurb {
+    background: white;
+    border-left: 4px solid var(--berry);
+    padding: 18px 24px;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .lead-blurb strong { color: var(--berry); font-style: normal; font-weight: 700; }
+
+  /* GRAMMAR THEORY */
+  .theory {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 28px 30px;
+    margin-bottom: 30px;
+  }
+  .theory h2 {
+    font-size: 26px; color: var(--ink);
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--website-yellow);
+  }
+  .theory h3 {
+    font-size: 19px; color: var(--berry);
+    margin-top: 22px; margin-bottom: 10px;
+  }
+  .theory p { margin-bottom: 10px; line-height: 1.65; }
+  .theory .uk { font-weight: 700; color: var(--ink); }
+  .theory ul { margin: 8px 0 12px 22px; }
+  .theory li { margin-bottom: 6px; line-height: 1.6; }
+  .theory table {
+    width: 100%; border-collapse: collapse;
+    margin: 12px 0; background: var(--warm-card-2);
+    border-radius: 6px; overflow: hidden;
+  }
+  .theory th, .theory td {
+    border: 1px solid var(--line);
+    padding: 9px 12px; text-align: left; font-size: 15px;
+  }
+  .theory th { background: var(--website-blue-pale); color: var(--ink); }
+  .theory .pron {
+    display: inline-block; background: var(--gold-pale);
+    border: 1px solid var(--website-yellow);
+    border-radius: 999px; padding: 1px 8px;
+    font-size: 13px; color: var(--muted); white-space: nowrap;
+  }
+  .theory .tip-mini {
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px; margin: 12px 0;
+    border-radius: 0 6px 6px 0; font-size: 14px;
+  }
+
+  /* TASK */
+  .task {
+    background: var(--warm-card);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 26px 28px;
+    margin-bottom: 22px;
+  }
+  .task-header {
+    display: flex; align-items: flex-start; gap: 18px;
+    margin-bottom: 16px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .task-num {
+    background: var(--website-yellow); color: #000;
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800; flex-shrink: 0;
+  }
+  .task-title-box { flex: 1; }
+  .task-title-box h2 { font-size: 21px; color: var(--ink); margin-bottom: 4px; line-height: 1.2; }
+  .task-title-box .uk-title {
+    font-size: 14px; color: var(--rose); font-style: italic;
+  }
+  .task-meta {
+    display: flex; gap: 12px; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-top: 6px; flex-wrap: wrap;
+  }
+  .task-meta .pill {
+    background: var(--website-yellow); color: #000;
+    padding: 3px 10px; border-radius: 12px; font-weight: 600;
+  }
+  .task-instruction {
+    color: var(--ink); margin-bottom: 14px; line-height: 1.55;
+    font-size: 15px;
+  }
+  .task-instruction .uk-inst {
+    display: block; color: var(--rose);
+    font-style: italic; font-size: 14px; margin-top: 2px;
+  }
+  .task-instruction strong { color: var(--berry); }
+
+  /* MODEL */
+  .model {
+    background: var(--warm-card-2);
+    border-left: 4px solid var(--website-yellow);
+    border-radius: 8px;
+    padding: 12px 16px; margin-bottom: 14px;
+    font-size: 14px;
+  }
+  .model .label {
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--berry);
+    font-weight: 700; margin-bottom: 4px;
+  }
+  .model .uk-text { font-weight: 700; font-size: 16px; color: var(--ink); }
+  .model .no-text { font-style: italic; color: var(--muted); margin-top: 3px; }
+
+  /* EXERCISES */
+  .exercise { margin-top: 10px; }
+  .ex-row {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 9px 0; border-bottom: 1px dashed var(--line); flex-wrap: wrap;
+  }
+  .ex-row:last-child { border-bottom: none; }
+  .ex-num {
+    color: var(--rose); font-weight: 700;
+    font-size: 14px; min-width: 22px;
+  }
+  .ex-prompt { flex: 1; min-width: 200px; font-size: 16px; line-height: 1.5; }
+  .ex-prompt .uk { font-weight: 700; color: var(--ink); }
+  .ex-prompt em { color: var(--muted); font-size: 13px; font-style: italic; }
+
+  input[type="text"] {
+    border: none; border-bottom: 2px solid var(--website-blue);
+    background: transparent; font-size: 16px; color: var(--ink);
+    padding: 4px 6px; min-width: 130px; outline: none;
+    transition: background 0.2s;
+  }
+  input[type="text"]:focus {
+    background: var(--website-yellow-pale);
+    border-bottom-color: var(--website-yellow);
+  }
+  input[type="text"].short { min-width: 50px; max-width: 80px; text-align: center; }
+  input[type="text"].long { min-width: 220px; }
+
+  /* TABLE LAYOUTS */
+  table.task-table {
+    width: 100%; border-collapse: collapse;
+    margin: 10px 0; background: white;
+  }
+  table.task-table th, table.task-table td {
+    border: 1px solid var(--line);
+    padding: 9px 11px; vertical-align: middle; text-align: left;
+  }
+  table.task-table th {
+    background: var(--website-blue-pale);
+    color: var(--ink); font-size: 14px;
+  }
+  table.task-table .uk { font-weight: 700; color: var(--ink); }
+
+  /* SORT TWO COL */
+  .sort-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-top: 10px;
+  }
+  .sort-col {
+    background: var(--warm-card-2);
+    border: 1px solid var(--line);
+    border-radius: 8px; padding: 12px;
+  }
+  .sort-col h4 {
+    font-size: 16px; color: var(--berry);
+    margin-bottom: 8px; padding-bottom: 5px;
+    border-bottom: 1px solid var(--line);
+  }
+  .sort-col textarea {
+    width: 100%; border: none; background: transparent;
+    font-family: var(--body-font); font-size: 15px;
+    color: var(--ink); min-height: 90px; resize: vertical;
+    outline: none;
+  }
+
+  .word-bank {
+    background: var(--gold-pale);
+    border: 1px dashed var(--gold);
+    border-radius: 8px; padding: 12px 14px;
+    margin: 10px 0; font-size: 15px;
+    line-height: 1.9;
+  }
+  .word-bank .pill {
+    display: inline-block; background: white;
+    border: 1px solid var(--website-blue);
+    color: var(--ink); border-radius: 999px;
+    padding: 3px 10px; margin: 2px; font-weight: 700;
+  }
+
+  /* DIALOG */
+  .dialog-box {
+    background: var(--warm-card-2);
+    border-radius: 8px; padding: 16px 20px; margin-top: 10px;
+  }
+  .dialog-line {
+    display: grid; grid-template-columns: 50px 1fr;
+    gap: 10px; align-items: baseline; padding: 5px 0;
+  }
+  .dialog-who {
+    font-size: 11px; font-weight: 700; color: var(--berry);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .dialog-who.b { color: var(--website-teal); }
+  .dialog-text { font-size: 16px; color: var(--ink); }
+  .dialog-text em {
+    display: block; font-size: 12px; color: var(--muted);
+    font-style: italic; margin-top: 2px;
+  }
+
+  /* TIP */
+  .tip-box {
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold);
+    padding: 11px 16px; border-radius: 0 6px 6px 0;
+    margin-top: 12px; font-size: 13px;
+    color: var(--ink); line-height: 1.55;
+  }
+  .tip-box strong { color: var(--berry); }
+
+
+  /* AUDIO */
+  .audio-box {
+    background: var(--website-blue-pale);
+    border: 1.5px solid var(--line);
+    border-left: 5px solid var(--website-yellow);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 14px 0 18px;
+  }
+  .audio-box .audio-title {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--website-blue-dark);
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .audio-box p {
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .audio-box audio {
+    width: 100%;
+    display: block;
+  }
+
+  /* ANSWER KEY */
+  .answer-key-toggle {
+    margin-top: 14px; padding: 8px 14px;
+    background: white; border: 1.5px solid var(--website-blue);
+    color: var(--website-blue); border-radius: 20px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .answer-key-toggle:hover {
+    background: var(--website-blue); color: white;
+  }
+  .answer-key {
+    display: none; margin-top: 12px; padding: 14px 18px;
+    background: var(--website-blue-pale);
+    border-left: 3px solid var(--website-yellow);
+    border-radius: 0 6px 6px 0; font-size: 14px;
+    line-height: 1.7; color: var(--ink);
+  }
+  .answer-key.shown { display: block; }
+  .answer-key strong { color: var(--website-blue-dark); }
+  .answer-key code {
+    background: white; padding: 1px 6px;
+    border-radius: 3px; font-style: italic;
+    font-family: var(--body-font);
+  }
+
+  /* VOCABULARY */
+  .vocab {
+    background: white;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 26px 28px; margin-top: 30px;
+  }
+  .vocab h2 {
+    font-size: 26px; color: var(--ink);
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--website-yellow);
+  }
+  .vocab h3 {
+    font-size: 20px; color: var(--berry);
+    margin-top: 22px; margin-bottom: 10px;
+  }
+  .vocab table {
+    width: 100%; border-collapse: collapse;
+    background: white; margin-top: 8px;
+  }
+  .vocab th, .vocab td {
+    border: 1px solid var(--line);
+    padding: 8px 11px; text-align: left;
+    font-size: 14px;
+  }
+  .vocab th {
+    background: var(--website-blue-pale);
+    color: var(--ink); font-weight: 700;
+  }
+  .vocab td.uk { font-weight: 700; color: var(--ink); }
+  .vocab td.kjonn {
+    text-align: center; font-weight: 700;
+    color: var(--berry); width: 90px;
+  }
+  .vocab td.kjonn.m { color: #0057B7; }
+  .vocab td.kjonn.f { color: #C2185B; }
+  .vocab td.kjonn.n { color: #00897B; }
+  .vocab td.kjonn.pl { color: #6A1B9A; }
+
+  /* FOOTER */
+  footer {
+    margin-top: 36px; padding: 24px;
+    background: var(--website-blue); color: white;
+    border-radius: 12px; text-align: center;
+    border-top: 8px solid var(--website-yellow);
+  }
+  footer .mantra {
+    font-style: italic; font-size: 18px;
+    color: var(--website-yellow); margin-bottom: 6px;
+  }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6; }
+
+  /* FLOATING KEYBOARD */
+  .floating-keyboard {
+    position: fixed; right: 18px; bottom: 18px; z-index: 9999;
+  }
+  .keyboard-toggle {
+    background: var(--website-blue); color: white; border: none;
+    border-radius: 24px; padding: 10px 16px;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  }
+  .keyboard-toggle:hover { background: var(--website-blue-dark); }
+  .keyboard-panel {
+    display: none; margin-top: 10px; background: white;
+    border: 2px solid var(--website-blue);
+    border-radius: 14px; padding: 12px; max-width: 470px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+  .keyboard-panel.open { display: block; }
+  .keyboard-help {
+    font-size: 12px; color: var(--muted);
+    margin-bottom: 8px; line-height: 1.4;
+  }
+  .keyboard-row { display: flex; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
+  .keyboard-row:last-child { margin-bottom: 0; }
+  .keyboard-row button {
+    min-width: 34px; min-height: 34px;
+    border: 1px solid var(--line);
+    background: var(--website-yellow-pale);
+    color: var(--ink); border-radius: 8px;
+    font-size: 17px; font-weight: 700; cursor: pointer;
+  }
+  .keyboard-row button:hover { background: var(--website-yellow); }
+  .keyboard-row button.keyboard-wide { min-width: 72px; font-size: 14px; }
+
+  @media print {
+    .floating-keyboard { display: none !important; }
+    .answer-key-toggle { display: none; }
+    .answer-key { display: none !important; }
+    .task { page-break-inside: avoid; box-shadow: none; }
+    body { background: white; }
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 16px 12px 40px; }
+    header.intro { padding: 24px 20px; }
+    header.intro h1 { font-size: 28px; }
+    .task, .theory, .vocab { padding: 20px 18px; }
+    .task-title-box h2 { font-size: 18px; }
+    .sort-grid { grid-template-columns: 1fr; }
+    .floating-keyboard { left: 10px; right: 10px; bottom: 10px; }
+    .keyboard-panel { max-width: 100%; max-height: 45vh; overflow-y: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="intro">
+  <div class="kicker">Praktyka · Øving</div>
+  <h1>Це. Хто це? Що це?</h1>
+  <div class="subtitle">Він · вона · воно · вони — grammatisk kjønn og pronomen</div>
+  <div class="meta">
+    <span><strong>Tid:</strong> ca. 60 minutter</span>
+    <span><strong>Nivå:</strong> A1</span>
+    <span><strong>Tema:</strong> Це, spørreord, kjønn, sim'ja</span>
+  </div>
+</header>
+
+<!-- LEAD -->
+<div class="lead-blurb">
+  I denne økten øver du på <strong>de små byggesteinene</strong> i ukrainsk: ordet <strong>це</strong>, spørsmålene <strong>Хто це?</strong> og <strong>Що це?</strong>, og pronomenene <strong>він / вона / воно / вони</strong>. Disse ordene åpner hele språkdøren — med dem kan du allerede peke, spørre og svare.
+</div>
+
+  <div class="audio-box">
+    <div class="audio-title">Audio 1 · hovedmodeller</div>
+    <p>Lytt først: <span class="uk">Це</span>, <span class="uk">Хто це?</span>, <span class="uk">Що це?</span> og <span class="uk">він / вона / воно / вони</span>.</p>
+    <audio controls preload="none">
+      <source src="audio/01_modeli_tse_khto_shcho.mp3" type="audio/mpeg">
+      Nettleseren din støtter ikke lydavspilling.
+    </audio>
+  </div>
+
+<!-- =========== GRAMMATIKK =========== -->
+<section class="theory">
+  <h2>Grammatikk — kort og presist</h2>
+
+  <h3>1. Це — «det er / dette er»</h3>
+  <p>På norsk sier vi «Dette er en bok». På ukrainsk holder det med to ord: <span class="uk">Це книга</span>. Ordet <strong>«er»</strong> trengs ikke i denne typen setninger.</p>
+  <p><span class="uk">Це</span> <span class="pron">tse</span> forandrer seg ikke. Du bruker samme form for personer, ting og flertall:</p>
+  <ul>
+    <li><span class="uk">Це мама.</span> — Dette er mamma.</li>
+    <li><span class="uk">Це стіл.</span> — Dette er et bord.</li>
+    <li><span class="uk">Це книжки.</span> — Dette er bøker.</li>
+  </ul>
+
+  <h3>2. Хто це? / Що це? — Hvem / Hva er det?</h3>
+  <p>To ulike spørsmål — basert på om vi spør om noen <em>levende</em> eller noe <em>ikke-levende</em>.</p>
+  <table>
+    <tr><th>Spørsmål</th><th>Brukes om</th><th>Eksempel</th></tr>
+    <tr><td><span class="uk">Хто це?</span> <span class="pron">khto tse</span></td><td>mennesker og dyr</td><td><span class="uk">— Це лікар.</span></td></tr>
+    <tr><td><span class="uk">Що це?</span> <span class="pron">sjtsjo tse</span></td><td>ting, steder, mat, abstrakte ord</td><td><span class="uk">— Це місто.</span></td></tr>
+  </table>
+  <div class="tip-mini"><strong>Huskeregel:</strong> <span class="uk">Хто</span> for de som puster. <span class="uk">Що</span> for alt annet.</div>
+
+  <h3>3. Grammatisk kjønn — він / вона / воно / вони</h3>
+  <p>På ukrainsk har alle substantiv et <strong>grammatisk kjønn</strong>. Dette gjelder ikke bare personer — også ting har kjønn. <span class="uk">Стіл</span> (bord) er <strong>han</strong>, <span class="uk">книга</span> (bok) er <strong>hun</strong>, <span class="uk">місто</span> (by) er <strong>det</strong>.</p>
+  <table>
+    <tr><th>Pronomen</th><th>Betydning</th><th>Typisk endelse</th><th>Eksempel</th></tr>
+    <tr><td><span class="uk">він</span> <span class="pron">vin</span></td><td>han / den (m)</td><td>konsonant, -й</td><td><span class="uk">стіл, брат, університет</span></td></tr>
+    <tr><td><span class="uk">вона</span> <span class="pron">vo-NA</span></td><td>hun / den (f)</td><td>-а, -я, -ія</td><td><span class="uk">мама, книга, країна</span></td></tr>
+    <tr><td><span class="uk">воно</span> <span class="pron">vo-NO</span></td><td>det (n)</td><td>-о, -е, -я</td><td><span class="uk">місто, море, життя</span></td></tr>
+    <tr><td><span class="uk">вони</span> <span class="pron">vo-NY</span></td><td>de (pl)</td><td>flertall</td><td><span class="uk">батьки, книжки, студенти</span></td></tr>
+  </table>
+  <div class="tip-mini"><strong>Unntak:</strong> <span class="uk">тато</span> (pappa) slutter på <em>-о</em>, men er <strong>han</strong> (<span class="uk">він</span>) — biologi vinner over endelse.</div>
+
+  <h3>4. У мене є… — «Jeg har…»</h3>
+  <p>På ukrainsk sier vi bokstavelig «hos meg er…»: <span class="uk">У мене є брат</span> = Jeg har en bror. Verbet <em>«ha»</em> brukes ikke som på norsk.</p>
+  <table>
+    <tr><th>Person</th><th>Form</th><th>Uttale</th></tr>
+    <tr><td>jeg</td><td><span class="uk">у мене</span></td><td><span class="pron">u me-NE</span></td></tr>
+    <tr><td>du</td><td><span class="uk">у тебе</span></td><td><span class="pron">u te-BE</span></td></tr>
+    <tr><td>han</td><td><span class="uk">у нього</span></td><td><span class="pron">u njo-HO</span></td></tr>
+    <tr><td>hun</td><td><span class="uk">у неї</span></td><td><span class="pron">u ne-JI</span></td></tr>
+    <tr><td>vi</td><td><span class="uk">у нас</span></td><td><span class="pron">u nas</span></td></tr>
+    <tr><td>dere / De</td><td><span class="uk">у вас</span></td><td><span class="pron">u vas</span></td></tr>
+    <tr><td>de</td><td><span class="uk">у них</span></td><td><span class="pron">u nykh</span></td></tr>
+  </table>
+
+  <h3>5. Ja / nei-svar</h3>
+  <ul>
+    <li><strong>Ja:</strong> <span class="uk">— Це банк? — Так, це банк.</span></li>
+    <li><strong>Nei:</strong> <span class="uk">— Це мед? — Ні, це не мед, це масло.</span></li>
+  </ul>
+  <div class="tip-mini"><strong>Intonasjon:</strong> spørsmål går opp <span style="color:#0B8EA3">↑</span>, svar går ned <span style="color:#0B8EA3">↓</span>.</div>
+
+  <h3>6. Uttale — kort kompass</h3>
+  <table>
+    <tr><th>Bokstav</th><th>Lyd</th><th>Eksempel</th></tr>
+    <tr><td><span class="uk">Ц ц</span></td><td><span class="pron">ts</span> som i <em>tsunami</em></td><td><span class="uk">це</span> <span class="pron">tse</span></td></tr>
+    <tr><td><span class="uk">Ч ч</span></td><td><span class="pron">tsj</span></td><td><span class="uk">чай</span> <span class="pron">tsjaj</span></td></tr>
+    <tr><td><span class="uk">Ш ш</span></td><td><span class="pron">sj</span> (hard)</td><td><span class="uk">школа</span> <span class="pron">SJKO-la</span></td></tr>
+    <tr><td><span class="uk">Щ щ</span></td><td><span class="pron">sj+tsj</span></td><td><span class="uk">що</span> <span class="pron">sjtsjo</span></td></tr>
+    <tr><td><span class="uk">Х х</span></td><td><span class="pron">kh</span>, luftlyd (tysk Bach)</td><td><span class="uk">хто</span> <span class="pron">khto</span></td></tr>
+    <tr><td><span class="uk">Ж ж</span></td><td><span class="pron">zj</span>, stemt</td><td><span class="uk">жінка</span> <span class="pron">ZJIN-ka</span></td></tr>
+    <tr><td><span class="uk">И и</span></td><td>mørk i/y</td><td><span class="uk">син</span> <span class="pron">syn</span></td></tr>
+    <tr><td><span class="uk">І і</span></td><td>klar i</td><td><span class="uk">він</span> <span class="pron">vin</span></td></tr>
+    <tr><td><span class="uk">Ї ї</span></td><td><span class="pron">ji</span></td><td><span class="uk">Індії</span> <span class="pron">IN-di-ji</span></td></tr>
+    <tr><td><span class="uk">Г г</span></td><td>h-lyd</td><td><span class="uk">Ужгород</span> <span class="pron">Uzj-HO-rod</span></td></tr>
+    <tr><td><span class="uk">Ґ ґ</span></td><td>hard g</td><td><span class="uk">ґанок</span> <span class="pron">GA-nok</span></td></tr>
+    <tr><td><span class="uk">Ь</span></td><td>mykner lyden før</td><td><span class="uk">день</span> <span class="pron">denj</span></td></tr>
+  </table>
+</section>
+
+<!-- =========== TASK 1 — UTTALE =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">1</div>
+    <div class="task-title-box">
+      <h2>Si lydene høyt — fem ganger hver</h2>
+      <div class="uk-title">Слухайте і повторюйте</div>
+      <div class="task-meta"><span class="pill">UTTALE</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Les hver rad høyt, fem ganger — først sakte, så fortere.
+    <span class="uk-inst">Читайте кожен рядок уголос п'ять разів — спочатку повільно, потім швидше.</span>
+  </p>
+
+  <div class="audio-box">
+    <div class="audio-title">Audio 2 · uttale sakte</div>
+    <p>Lytt og gjenta. Fokuser på <span class="uk">Ц, Ч, Ш, Щ, Х</span>.</p>
+    <audio controls preload="none">
+      <source src="audio/02_zvuky_slow.mp3" type="audio/mpeg">
+      Nettleseren din støtter ikke lydavspilling.
+    </audio>
+  </div>
+  <div class="exercise">
+    <div class="ex-row"><div class="ex-num">1.</div><div class="ex-prompt"><span class="uk">Ц ц</span> <span class="pron">ts</span> — <em>ца — це — ци — цо — цу</em></div></div>
+    <div class="ex-row"><div class="ex-num">2.</div><div class="ex-prompt"><span class="uk">Ч ч</span> <span class="pron">tsj</span> — <em>ча — че — чи — чо — чу</em></div></div>
+    <div class="ex-row"><div class="ex-num">3.</div><div class="ex-prompt"><span class="uk">Ш ш</span> <span class="pron">sj</span> — <em>ша — ше — ши — шо — шу</em></div></div>
+    <div class="ex-row"><div class="ex-num">4.</div><div class="ex-prompt"><span class="uk">Щ щ</span> <span class="pron">sjtsj</span> — <em>ща — ще — щи — що — щу</em></div></div>
+    <div class="ex-row"><div class="ex-num">5.</div><div class="ex-prompt"><span class="uk">Х х</span> <span class="pron">kh</span> — <em>ха — хе — хи — хо — ху</em></div></div>
+    <div class="ex-row"><div class="ex-num">6.</div><div class="ex-prompt"><span class="uk">це · чай · школа · що · хто</span> <em>— les hvert ord tre ganger</em></div></div>
+  </div>
+  <div class="tip-box">
+    <strong>Tips:</strong> Hold hånden foran munnen ved <span class="uk">Ш</span> og <span class="uk">Ж</span>. Med <span class="uk">Ш</span> kjenner du <em>luft</em>; med <span class="uk">Ж</span> kjenner du <em>vibrasjon</em>.
+  </div>
+</section>
+
+<!-- =========== TASK 2 — FAMILIE =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">2</div>
+    <div class="task-title-box">
+      <h2>Familieord — skriv feminin form</h2>
+      <div class="uk-title">Сім'я — напишіть жіночий рід</div>
+      <div class="task-meta"><span class="pill">VOKABULAR</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Skriv den feminine versjonen av hvert ord.
+    <span class="uk-inst">Напишіть жіночу форму кожного слова.</span>
+  </p>
+
+  <div class="audio-box">
+    <div class="audio-title">Audio 3 · familieord + У мене є</div>
+    <p>Lytt til familieordene og korte setninger med <span class="uk">У мене є…</span>.</p>
+    <audio controls preload="none">
+      <source src="audio/03_familieord_u_mene_ye.mp3" type="audio/mpeg">
+      Nettleseren din støtter ikke lydavspilling.
+    </audio>
+  </div>
+  <div class="word-bank">
+    <span class="pill">мати</span><span class="pill">мама</span><span class="pill">бабуся</span><span class="pill">дочка</span><span class="pill">сестра</span><span class="pill">тітка</span><span class="pill">внучка</span><span class="pill">дружина</span><span class="pill">подруга</span><span class="pill">дівчина</span><span class="pill">сусідка</span>
+  </div>
+  <table class="task-table">
+    <tr><th>Maskulin (m)</th><th>Feminin (f)</th><th>Uttale (m)</th></tr>
+    <tr><td class="uk">батько</td><td><input type="text"></td><td><span class="pron">BATʹ-ko</span></td></tr>
+    <tr><td class="uk">тато</td><td><input type="text"></td><td><span class="pron">TA-to</span></td></tr>
+    <tr><td class="uk">дідусь</td><td><input type="text"></td><td><span class="pron">di-DUSʹ</span></td></tr>
+    <tr><td class="uk">син</td><td><input type="text"></td><td><span class="pron">syn</span></td></tr>
+    <tr><td class="uk">брат</td><td><input type="text"></td><td><span class="pron">brat</span></td></tr>
+    <tr><td class="uk">дядько</td><td><input type="text"></td><td><span class="pron">DJADʹ-ko</span></td></tr>
+    <tr><td class="uk">внук</td><td><input type="text"></td><td><span class="pron">vnuk</span></td></tr>
+    <tr><td class="uk">чоловік</td><td><input type="text"></td><td><span class="pron">tsjo-lo-VIK</span></td></tr>
+    <tr><td class="uk">друг</td><td><input type="text"></td><td><span class="pron">druh</span></td></tr>
+    <tr><td class="uk">хлопець</td><td><input type="text"></td><td><span class="pron">KHLO-petsʹ</span></td></tr>
+    <tr><td class="uk">сусід</td><td><input type="text"></td><td><span class="pron">su-SID</span></td></tr>
+  </table>
+  <button class="answer-key-toggle" onclick="toggleAnswer('ans2', this)">Vis fasit ↓</button>
+  <div class="answer-key" id="ans2">
+    <strong>Fasit:</strong> батько — <code>мати</code> · тато — <code>мама</code> · дідусь — <code>бабуся</code> · син — <code>дочка</code> · брат — <code>сестра</code> · дядько — <code>тітка</code> · внук — <code>внучка</code> · чоловік — <code>дружина</code> · друг — <code>подруга</code> · хлопець — <code>дівчина</code> · сусід — <code>сусідка</code>
+  </div>
+</section>
+
+<!-- =========== TASK 3 — У МЕНЕ Є =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">3</div>
+    <div class="task-title-box">
+      <h2>У мене є… — sett inn riktig form</h2>
+      <div class="uk-title">«Jeg har…» — skriv riktig pronomen-form</div>
+      <div class="task-meta"><span class="pill">POSSESSIV</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Velg riktig form: <span class="uk">мене, тебе, нього, неї, нас, вас, них</span>.
+    <span class="uk-inst">Виберіть правильну форму займенника.</span>
+  </p>
+  <div class="model">
+    <div class="label">Modell</div>
+    <div class="uk-text">У мене є подруга.</div>
+    <div class="no-text">Jeg har en venninne.</div>
+  </div>
+  <div class="tip-box">
+    <strong>Lyttetips:</strong> Bruk Audio 3 over som modell for rytmen i <span class="uk">У мене є…</span>.
+  </div>
+  <div class="exercise">
+    <div class="ex-row"><div class="ex-num">1.</div><div class="ex-prompt">У <input type="text" class="short"> є брат і сестра. <em>(ми)</em></div></div>
+    <div class="ex-row"><div class="ex-num">2.</div><div class="ex-prompt">У <input type="text" class="short"> є хлопець. <em>(вона)</em></div></div>
+    <div class="ex-row"><div class="ex-num">3.</div><div class="ex-prompt">У <input type="text" class="short"> є син чи дочка? <em>(ти)</em></div></div>
+    <div class="ex-row"><div class="ex-num">4.</div><div class="ex-prompt">У <input type="text" class="short"> є племінник Юрко. <em>(вони)</em></div></div>
+    <div class="ex-row"><div class="ex-num">5.</div><div class="ex-prompt">У <input type="text" class="short"> є прадідусь. <em>(він)</em></div></div>
+    <div class="ex-row"><div class="ex-num">6.</div><div class="ex-prompt">У <input type="text" class="short"> є сім'я? <em>(ви)</em></div></div>
+    <div class="ex-row"><div class="ex-num">7.</div><div class="ex-prompt">У <input type="text" class="short"> є подруга з Норвегії. <em>(я)</em></div></div>
+  </div>
+  <button class="answer-key-toggle" onclick="toggleAnswer('ans3', this)">Vis fasit ↓</button>
+  <div class="answer-key" id="ans3">
+    <strong>Fasit:</strong> 1. <code>нас</code> · 2. <code>неї</code> · 3. <code>тебе</code> · 4. <code>них</code> · 5. <code>нього</code> · 6. <code>вас</code> · 7. <code>мене</code>
+  </div>
+</section>
+
+<!-- =========== TASK 4 — ХТО / ЩО =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">4</div>
+    <div class="task-title-box">
+      <h2>Хто це? eller Що це? — velg riktig spørsmål</h2>
+      <div class="uk-title">Виберіть правильне питання</div>
+      <div class="task-meta"><span class="pill">SPØRREORD</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Skriv <span class="uk">Хто це?</span> for personer/dyr, <span class="uk">Що це?</span> for ting.
+    <span class="uk-inst">Напишіть <span class="uk">Хто це?</span> або <span class="uk">Що це?</span></span>
+  </p>
+  <div class="exercise">
+    <div class="ex-row"><div class="ex-num">1.</div><div class="ex-prompt"><input type="text" class="long"> — Це студентка.</div></div>
+    <div class="ex-row"><div class="ex-num">2.</div><div class="ex-prompt"><input type="text" class="long"> — Це океан.</div></div>
+    <div class="ex-row"><div class="ex-num">3.</div><div class="ex-prompt"><input type="text" class="long"> — Це дитина.</div></div>
+    <div class="ex-row"><div class="ex-num">4.</div><div class="ex-prompt"><input type="text" class="long"> — Це молоко.</div></div>
+    <div class="ex-row"><div class="ex-num">5.</div><div class="ex-prompt"><input type="text" class="long"> — Це кіт.</div></div>
+    <div class="ex-row"><div class="ex-num">6.</div><div class="ex-prompt"><input type="text" class="long"> — Це магазин.</div></div>
+    <div class="ex-row"><div class="ex-num">7.</div><div class="ex-prompt"><input type="text" class="long"> — Це викладачка.</div></div>
+    <div class="ex-row"><div class="ex-num">8.</div><div class="ex-prompt"><input type="text" class="long"> — Це телефон.</div></div>
+    <div class="ex-row"><div class="ex-num">9.</div><div class="ex-prompt"><input type="text" class="long"> — Це бабуся.</div></div>
+    <div class="ex-row"><div class="ex-num">10.</div><div class="ex-prompt"><input type="text" class="long"> — Це місто Київ.</div></div>
+  </div>
+  <button class="answer-key-toggle" onclick="toggleAnswer('ans4', this)">Vis fasit ↓</button>
+  <div class="answer-key" id="ans4">
+    <strong>Fasit:</strong> 1. <code>Хто це?</code> · 2. <code>Що це?</code> · 3. <code>Хто це?</code> · 4. <code>Що це?</code> · 5. <code>Хто це?</code> · 6. <code>Що це?</code> · 7. <code>Хто це?</code> · 8. <code>Що це?</code> · 9. <code>Хто це?</code> · 10. <code>Що це?</code>
+  </div>
+</section>
+
+<!-- =========== TASK 5 — SORTERING ХТО / ЩО =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">5</div>
+    <div class="task-title-box">
+      <h2>Sorter ordene — Хто? eller Що?</h2>
+      <div class="uk-title">Розподіліть слова за групами</div>
+      <div class="task-meta"><span class="pill">SORTERING</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Skriv hvert ord under riktig kolonne.
+    <span class="uk-inst">Запишіть кожне слово у потрібну колонку.</span>
+  </p>
+  <div class="word-bank">
+    <span class="pill">студентка</span><span class="pill">син</span><span class="pill">стіл</span><span class="pill">сумка</span><span class="pill">бабуся</span><span class="pill">брат</span><span class="pill">чоловік</span><span class="pill">жінка</span><span class="pill">країна</span><span class="pill">Київ</span><span class="pill">місто</span><span class="pill">лікар</span><span class="pill">кіт</span><span class="pill">море</span><span class="pill">фото</span><span class="pill">кімната</span><span class="pill">гуртожиток</span><span class="pill">подруга</span>
+  </div>
+  <div class="sort-grid">
+    <div class="sort-col">
+      <h4><span class="uk">Хто?</span> — levende</h4>
+      <textarea placeholder="…"></textarea>
+    </div>
+    <div class="sort-col">
+      <h4><span class="uk">Що?</span> — ting / steder</h4>
+      <textarea placeholder="…"></textarea>
+    </div>
+  </div>
+  <button class="answer-key-toggle" onclick="toggleAnswer('ans5', this)">Vis fasit ↓</button>
+  <div class="answer-key" id="ans5">
+    <strong>Хто?</strong> <code>студентка, син, бабуся, брат, чоловік, жінка, лікар, кіт, подруга</code><br>
+    <strong>Що?</strong> <code>стіл, сумка, країна, Київ, місто, море, фото, кімната, гуртожиток</code>
+  </div>
+</section>
+
+<!-- =========== TASK 6 — KJØNN PRONOMEN =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">6</div>
+    <div class="task-title-box">
+      <h2>Velg pronomen — він / вона / воно / вони</h2>
+      <div class="uk-title">Виберіть займенник</div>
+      <div class="task-meta"><span class="pill">KJØNN</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Skriv <span class="uk">він</span>, <span class="uk">вона</span>, <span class="uk">воно</span> eller <span class="uk">вони</span> ved hvert ord.
+    <span class="uk-inst">Напишіть займенник до кожного слова.</span>
+  </p>
+  <table class="task-table">
+    <tr><th>Ord</th><th>Pronomen</th><th>Ord</th><th>Pronomen</th></tr>
+    <tr><td class="uk">студент</td><td><input type="text" class="short"></td><td class="uk">книга</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">масло</td><td><input type="text" class="short"></td><td class="uk">батьки</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">ректор</td><td><input type="text" class="short"></td><td class="uk">дівчина</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">вікно</td><td><input type="text" class="short"></td><td class="uk">брати</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">лікар</td><td><input type="text" class="short"></td><td class="uk">ліжко</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">фізика</td><td><input type="text" class="short"></td><td class="uk">молоко</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">лампа</td><td><input type="text" class="short"></td><td class="uk">гуртожиток</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">місто</td><td><input type="text" class="short"></td><td class="uk">країна</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">слово</td><td><input type="text" class="short"></td><td class="uk">книжки</td><td><input type="text" class="short"></td></tr>
+    <tr><td class="uk">тато</td><td><input type="text" class="short"></td><td class="uk">сонце</td><td><input type="text" class="short"></td></tr>
+  </table>
+  <button class="answer-key-toggle" onclick="toggleAnswer('ans6', this)">Vis fasit ↓</button>
+  <div class="answer-key" id="ans6">
+    <strong>Fasit:</strong> студент — <code>він</code>; книга — <code>вона</code>; масло — <code>воно</code>; батьки — <code>вони</code>; ректор — <code>він</code>; дівчина — <code>вона</code>; вікно — <code>воно</code>; брати — <code>вони</code>; лікар — <code>він</code>; ліжко — <code>воно</code>; фізика — <code>вона</code>; молоко — <code>воно</code>; лампа — <code>вона</code>; гуртожиток — <code>він</code>; місто — <code>воно</code>; країна — <code>вона</code>; слово — <code>воно</code>; книжки — <code>вони</code>; тато — <code>він</code> (unntak!); сонце — <code>воно</code>.
+  </div>
+</section>
+
+<!-- =========== TASK 7 — ERSTATT MED PRONOMEN =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">7</div>
+    <div class="task-title-box">
+      <h2>Bytt substantivet med pronomen</h2>
+      <div class="uk-title">Замініть іменник займенником</div>
+      <div class="task-meta"><span class="pill">PRONOMEN</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Skriv <span class="uk">він / вона / воно / вони</span> i stedet for navnet.
+    <span class="uk-inst">Замініть слово на займенник.</span>
+  </p>
+  <div class="model">
+    <div class="label">Modell</div>
+    <div class="uk-text">Це ручка. Вона тут.</div>
+    <div class="no-text">Dette er en penn. Den er her.</div>
+  </div>
+  <div class="exercise">
+    <div class="ex-row"><div class="ex-num">1.</div><div class="ex-prompt"><span class="uk">Це студент.</span> <input type="text" class="short"> <span class="uk">тут.</span></div></div>
+    <div class="ex-row"><div class="ex-num">2.</div><div class="ex-prompt"><span class="uk">Це студентка.</span> <input type="text" class="short"> <span class="uk">тут.</span></div></div>
+    <div class="ex-row"><div class="ex-num">3.</div><div class="ex-prompt"><span class="uk">Це місто.</span> <input type="text" class="short"> <span class="uk">красиве.</span></div></div>
+    <div class="ex-row"><div class="ex-num">4.</div><div class="ex-prompt"><span class="uk">Це книжки.</span> <input type="text" class="short"> <span class="uk">тут.</span></div></div>
+    <div class="ex-row"><div class="ex-num">5.</div><div class="ex-prompt"><span class="uk">Це лікар.</span> <input type="text" class="short"> <span class="uk">тут.</span></div></div>
+    <div class="ex-row"><div class="ex-num">6.</div><div class="ex-prompt"><span class="uk">Це лампа.</span> <input type="text" class="short"> <span class="uk">тут.</span></div></div>
+    <div class="ex-row"><div class="ex-num">7.</div><div class="ex-prompt"><span class="uk">Це вікно.</span> <input type="text" class="short"> <span class="uk">там.</span></div></div>
+    <div class="ex-row"><div class="ex-num">8.</div><div class="ex-prompt"><span class="uk">Це батьки.</span> <input type="text" class="short"> <span class="uk">там.</span></div></div>
+    <div class="ex-row"><div class="ex-num">9.</div><div class="ex-prompt"><span class="uk">Це сонце.</span> <input type="text" class="short"> <span class="uk">жовте.</span></div></div>
+    <div class="ex-row"><div class="ex-num">10.</div><div class="ex-prompt"><span class="uk">Це Микола.</span> <input type="text" class="short"> <span class="uk">лікар.</span></div></div>
+  </div>
+  <button class="answer-key-toggle" onclick="toggleAnswer('ans7', this)">Vis fasit ↓</button>
+  <div class="answer-key" id="ans7">
+    <strong>Fasit:</strong> 1. <code>Він</code> · 2. <code>Вона</code> · 3. <code>Воно</code> · 4. <code>Вони</code> · 5. <code>Він</code> · 6. <code>Вона</code> · 7. <code>Воно</code> · 8. <code>Вони</code> · 9. <code>Воно</code> · 10. <code>Він</code>
+  </div>
+</section>
+
+<!-- =========== TASK 8 — JA-SVAR =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">8</div>
+    <div class="task-title-box">
+      <h2>Svar bekreftende — Так, це…</h2>
+      <div class="uk-title">Дайте ствердну відповідь</div>
+      <div class="task-meta"><span class="pill">JA-SVAR</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Svar med <span class="uk">Так, це …</span>
+    <span class="uk-inst">Відповідайте за моделлю.</span>
+  </p>
+  <div class="exercise">
+    <div class="ex-row"><div class="ex-num">1.</div><div class="ex-prompt"><span class="uk">— Це банк?</span> — <input type="text" class="long"></div></div>
+    <div class="ex-row"><div class="ex-num">2.</div><div class="ex-prompt"><span class="uk">— Це сестра?</span> — <input type="text" class="long"></div></div>
+    <div class="ex-row"><div class="ex-num">3.</div><div class="ex-prompt"><span class="uk">— Це театр?</span> — <input type="text" class="long"></div></div>
+    <div class="ex-row"><div class="ex-num">4.</div><div class="ex-prompt"><span class="uk">— Це суп?</span> — <input type="text" class="long"></div></div>
+    <div class="ex-row"><div class="ex-num">5.</div><div class="ex-prompt"><span class="uk">— Це кімната?</span> — <input type="text" class="long"></div></div>
+  </div>
+  <button class="answer-key-toggle" onclick="toggleAnswer('ans8', this)">Vis fasit ↓</button>
+  <div class="answer-key" id="ans8">
+    <strong>Fasit:</strong> 1. <code>Так, це банк.</code> · 2. <code>Так, це сестра.</code> · 3. <code>Так, це театр.</code> · 4. <code>Так, це суп.</code> · 5. <code>Так, це кімната.</code>
+  </div>
+</section>
+
+<!-- =========== TASK 9 — NEI-SVAR =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">9</div>
+    <div class="task-title-box">
+      <h2>Svar nektende — Ні, це не…, це…</h2>
+      <div class="uk-title">Дайте заперечну відповідь</div>
+      <div class="task-meta"><span class="pill">NEI-SVAR</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Svar etter mønsteret: <span class="uk">Ні, це не …, це …</span>
+    <span class="uk-inst">Відповідайте: «Ні, це не …, це …»</span>
+  </p>
+  <div class="model">
+    <div class="label">Modell</div>
+    <div class="uk-text">— Це мед? — Ні, це не мед, це масло.</div>
+  </div>
+  <table class="task-table">
+    <tr><th>Spørsmål</th><th>Virkelig ord</th><th>Svar</th></tr>
+    <tr><td class="uk">Це студент?</td><td class="uk">спортсмен</td><td><input type="text"></td></tr>
+    <tr><td class="uk">Це молоко?</td><td class="uk">сік</td><td><input type="text"></td></tr>
+    <tr><td class="uk">Це цирк?</td><td class="uk">банк</td><td><input type="text"></td></tr>
+    <tr><td class="uk">Це літо?</td><td class="uk">зима</td><td><input type="text"></td></tr>
+    <tr><td class="uk">Це курка?</td><td class="uk">риба</td><td><input type="text"></td></tr>
+  </table>
+  <button class="answer-key-toggle" onclick="toggleAnswer('ans9', this)">Vis fasit ↓</button>
+  <div class="answer-key" id="ans9">
+    <strong>Fasit:</strong> 1. <code>Ні, це не студент, це спортсмен.</code><br>
+    2. <code>Ні, це не молоко, це сік.</code><br>
+    3. <code>Ні, це не цирк, це банк.</code><br>
+    4. <code>Ні, це не літо, це зима.</code><br>
+    5. <code>Ні, це не курка, це риба.</code>
+  </div>
+</section>
+
+<!-- =========== TASK 10 — DIALOG =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">10</div>
+    <div class="task-title-box">
+      <h2>Les dialogen og lag din egen</h2>
+      <div class="uk-title">Прочитайте діалог і складіть свій</div>
+      <div class="task-meta"><span class="pill">DIALOG</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Les modelldialogen høyt to og to. Fyll deretter inn din egen.
+    <span class="uk-inst">Прочитайте діалог уголос у парах. Складіть свій варіант.</span>
+  </p>
+
+  <div class="audio-box">
+    <div class="audio-title">Audio 4 · dialog og tekstmodell</div>
+    <p>Lytt til dialogen først. Bruk samme rolige rytme når du lager egen dialog og egen tekst.</p>
+    <audio controls preload="none">
+      <source src="audio/06_dialog_tekst_model.mp3" type="audio/mpeg">
+      Nettleseren din støtter ikke lydavspilling.
+    </audio>
+  </div>
+
+  <div class="dialog-box" style="margin-bottom:14px">
+    <div class="dialog-line"><div class="dialog-who">A</div><div class="dialog-text">Добрий день. Я студент Алі. А хто Ви?<em>God dag. Jeg er student Ali. Hvem er De?</em></div></div>
+    <div class="dialog-line"><div class="dialog-who b">B</div><div class="dialog-text">Добрий день. Я студентка Марія. А хто вони?<em>God dag. Jeg er student Maria. Og hvem er de?</em></div></div>
+    <div class="dialog-line"><div class="dialog-who">A</div><div class="dialog-text">Вони студенти. Він студент Ахмед. Вона студентка Діана.<em>De er studenter. Han er student Ahmed. Hun er student Diana.</em></div></div>
+  </div>
+
+  <p class="task-instruction" style="margin-top:10px"><strong>Din egen dialog:</strong></p>
+  <div class="dialog-box">
+    <div class="dialog-line"><div class="dialog-who">A</div><div class="dialog-text"><span class="uk">Добрий день. Я студент / студентка</span> <input type="text"> <span class="uk">. А хто Ви?</span></div></div>
+    <div class="dialog-line"><div class="dialog-who b">B</div><div class="dialog-text"><span class="uk">Добрий день. Я студент / студентка</span> <input type="text"> <span class="uk">.</span></div></div>
+    <div class="dialog-line"><div class="dialog-who">A</div><div class="dialog-text"><span class="uk">А хто він?</span></div></div>
+    <div class="dialog-line"><div class="dialog-who b">B</div><div class="dialog-text"><span class="uk">Він студент</span> <input type="text"> <span class="uk">.</span></div></div>
+    <div class="dialog-line"><div class="dialog-who">A</div><div class="dialog-text"><span class="uk">А хто вона?</span></div></div>
+    <div class="dialog-line"><div class="dialog-who b">B</div><div class="dialog-text"><span class="uk">Вона студентка</span> <input type="text"> <span class="uk">.</span></div></div>
+  </div>
+</section>
+
+<!-- =========== TASK 11 — MIN TEKST =========== -->
+<section class="task">
+  <div class="task-header">
+    <div class="task-num">11</div>
+    <div class="task-title-box">
+      <h2>Lag din egen tekst — om deg selv</h2>
+      <div class="uk-title">Складіть свій текст</div>
+      <div class="task-meta"><span class="pill">FRI TALE</span></div>
+    </div>
+  </div>
+  <p class="task-instruction">
+    Fyll inn og les høyt.
+    <span class="uk-inst">Заповніть і прочитайте вголос.</span>
+  </p>
+  <div class="tip-box">
+    <strong>Lyttetips:</strong> Siste del av Audio 4 gir en modell for teksten om deg selv.
+  </div>
+  <div class="dialog-box">
+    <div class="dialog-line"><div class="dialog-who">Ти</div><div class="dialog-text">
+      <span class="uk">Добрий день. Мене звати</span> <input type="text" placeholder="ім'я">.
+      <span class="uk">Я з</span> <input type="text" placeholder="країна">.
+      <span class="uk">Я студент / студентка.</span>
+      <span class="uk">Тепер я живу в</span> <input type="text" placeholder="місто">.
+      <span class="uk">Це красиве місто.</span>
+      <span class="uk">У мене є</span> <input type="text" placeholder="брат / сестра / подруга">.
+    </div></div>
+  </div>
+  <div class="tip-box">
+    <strong>Uttale-tips:</strong> <span class="uk">me-NE zva-TY</span>, <span class="uk">stu-DENT</span>, <span class="uk">kra-SY-ve MIS-to</span>. Ett trykk per ord, rolig tempo.
+  </div>
+</section>
+
+<!-- =========== VOCABULARY =========== -->
+<section class="vocab">
+  <h2>Ordliste · Слова</h2>
+  <p style="color:var(--muted); font-size:14px; margin-bottom:12px;">
+    <strong>kjønn:</strong> m = <span style="color:#0057B7">hankjønn (він)</span> · f = <span style="color:#C2185B">hunkjønn (вона)</span> · n = <span style="color:#00897B">intetkjønn (воно)</span> · pl = <span style="color:#6A1B9A">flertall (вони)</span>
+  </p>
+
+  <h3>Substantiv · Іменники</h3>
+  <table>
+    <thead>
+      <tr><th>Українська</th><th>Norsk</th><th>kjønn</th></tr>
+    </thead>
+    <tbody>
+      <!-- Familie -->
+      <tr><td class="uk">сім'я / родина</td><td>familie</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">батько</td><td>far</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">тато</td><td>pappa</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">мати</td><td>mor</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">мама</td><td>mamma</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">дідусь</td><td>bestefar</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">бабуся</td><td>bestemor</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">син</td><td>sønn</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">дочка / донька</td><td>datter</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">брат</td><td>bror</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">сестра</td><td>søster</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">дядько</td><td>onkel</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">тітка</td><td>tante</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">внук</td><td>barnebarn (gutt)</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">внучка</td><td>barnebarn (jente)</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">чоловік</td><td>mann / ektemann</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">жінка</td><td>kvinne / kone</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">дружина</td><td>kone</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">друг</td><td>venn</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">подруга</td><td>venninne</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">хлопець</td><td>gutt / kjæreste</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">дівчина</td><td>jente / ung kvinne</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">сусід</td><td>nabo (mann)</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">сусідка</td><td>nabo (kvinne)</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">батьки</td><td>foreldre</td><td class="kjonn pl">pl</td></tr>
+      <tr><td class="uk">діти</td><td>barn</td><td class="kjonn pl">pl</td></tr>
+      <!-- Personer / yrker -->
+      <tr><td class="uk">людина</td><td>menneske</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">дитина</td><td>barn</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">студент</td><td>student (m)</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">студентка</td><td>student (f)</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">студенти</td><td>studenter</td><td class="kjonn pl">pl</td></tr>
+      <tr><td class="uk">лікар</td><td>lege</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">викладач</td><td>lærer (m)</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">викладачка</td><td>lærer (f)</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">ректор</td><td>rektor</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">спортсмен</td><td>idrettsutøver</td><td class="kjonn m">m</td></tr>
+      <!-- Ting / steder -->
+      <tr><td class="uk">стіл</td><td>bord</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">крісло</td><td>lenestol</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">ліжко</td><td>seng</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">лампа</td><td>lampe</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">вікно</td><td>vindu</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">кімната</td><td>rom</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">книга / книжка</td><td>bok</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">книжки</td><td>bøker</td><td class="kjonn pl">pl</td></tr>
+      <tr><td class="uk">зошит</td><td>skrivebok</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">олівець</td><td>blyant</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">ручка</td><td>penn</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">сумка</td><td>veske</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">телефон</td><td>telefon</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">фото</td><td>foto</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">слово</td><td>ord</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">університет</td><td>universitet</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">гуртожиток</td><td>studentbolig</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">школа</td><td>skole</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">магазин</td><td>butikk</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">аптека</td><td>apotek</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">банк</td><td>bank</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">театр</td><td>teater</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">цирк</td><td>sirkus</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">парк</td><td>park</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">ринок</td><td>marked</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">кафе</td><td>kafé</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">місто</td><td>by</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">село</td><td>landsby</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">країна</td><td>land</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">Київ</td><td>Kyiv</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">Харків</td><td>Kharkiv</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">Львів</td><td>Lviv</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">Ужгород</td><td>Uzjhorod</td><td class="kjonn m">m</td></tr>
+      <!-- Mat / natur -->
+      <tr><td class="uk">їжа</td><td>mat</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">хліб</td><td>brød</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">молоко</td><td>melk</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">масло</td><td>smør</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">мед</td><td>honning</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">сир</td><td>ost</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">цукор</td><td>sukker</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">суп</td><td>suppe</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">сік</td><td>juice</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">чай</td><td>te</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">риба</td><td>fisk</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">курка</td><td>kylling</td><td class="kjonn f">f</td></tr>
+      <!-- Dyr / natur -->
+      <tr><td class="uk">кіт</td><td>katt</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">собака</td><td>hund</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">сонце</td><td>sol</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">небо</td><td>himmel</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">море</td><td>hav</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">дерево</td><td>tre</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">дощ</td><td>regn</td><td class="kjonn m">m</td></tr>
+      <tr><td class="uk">літо</td><td>sommer</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">зима</td><td>vinter</td><td class="kjonn f">f</td></tr>
+      <!-- Abstraktt -->
+      <tr><td class="uk">життя</td><td>liv</td><td class="kjonn n">n</td></tr>
+      <tr><td class="uk">любов</td><td>kjærlighet</td><td class="kjonn f">f</td></tr>
+      <tr><td class="uk">фізика</td><td>fysikk</td><td class="kjonn f">f</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Verb · Дієслова</h3>
+  <table>
+    <thead>
+      <tr><th>Українська</th><th>Norsk</th><th>Eksempel</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="uk">бути</td><td>å være</td><td><span class="uk">Я студент.</span> (= «Я є студент»)</td></tr>
+      <tr><td class="uk">звати</td><td>å hete / å kalle</td><td><span class="uk">Мене звати Анна.</span></td></tr>
+      <tr><td class="uk">жити</td><td>å bo / å leve</td><td><span class="uk">Я живу в Осло.</span></td></tr>
+      <tr><td class="uk">вчитися</td><td>å studere / å lære</td><td><span class="uk">Я вчуся в університеті.</span></td></tr>
+      <tr><td class="uk">мати</td><td>å ha (sjelden brukt)</td><td>oftest: <span class="uk">У мене є…</span></td></tr>
+      <tr><td class="uk">бачити</td><td>å se</td><td><span class="uk">Я рада тебе бачити.</span></td></tr>
+      <tr><td class="uk">читати</td><td>å lese</td><td><span class="uk">Я читаю книгу.</span></td></tr>
+      <tr><td class="uk">говорити</td><td>å snakke</td><td><span class="uk">Я говорю норвезькою.</span></td></tr>
+      <tr><td class="uk">знати</td><td>å vite / å kjenne</td><td><span class="uk">Я знаю слово.</span></td></tr>
+      <tr><td class="uk">любити</td><td>å like / å elske</td><td><span class="uk">Я люблю чай.</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="mantra">Хто це? Що це? Це початок!</div>
+  <p>Hvem er det? Hva er det? Dette er begynnelsen!</p>
+</footer>
+
+</div>
+
+<!-- FLOATING KEYBOARD -->
+<div class="floating-keyboard" id="ukKeyboard">
+  <button class="keyboard-toggle" type="button" onclick="toggleKeyboard()">⌨ Українська клавіатура</button>
+  <div class="keyboard-panel" id="keyboardPanel">
+    <div class="keyboard-help">Klikk først i et skrivefelt. Velg deretter ukrainske bokstaver her.</div>
+    <div id="keyboardRows"></div>
+  </div>
+</div>
+
+<script>
+  function toggleAnswer(id, btn) {
+    const el = document.getElementById(id);
+    if (!el || !btn) return;
+    if (el.classList.contains('shown')) {
+      el.classList.remove('shown');
+      btn.textContent = btn.textContent.replace('Skjul', 'Vis').replace('↑', '↓');
+    } else {
+      el.classList.add('shown');
+      btn.textContent = btn.textContent.replace('Vis', 'Skjul').replace('↓', '↑');
+    }
+  }
+
+  // Save inputs locally
+  document.querySelectorAll('input[type="text"], textarea').forEach((el, i) => {
+    el.addEventListener('focus', () => setActiveTextField(el));
+    el.addEventListener('click', () => setActiveTextField(el));
+    const key = 'praktyka1_' + (el.name || 'i' + i);
+    try {
+      const saved = sessionStorage.getItem(key);
+      if (saved) el.value = saved;
+      el.addEventListener('input', () => {
+        try { sessionStorage.setItem(key, el.value); } catch(e) {}
+      });
+    } catch(e) {}
+  });
+
+  // UA KEYBOARD
+  let activeTextField = null;
+  let keyboardUppercase = false;
+  const ukrainianKeyboardRows = [
+    ['а','б','в','г','ґ','д','е','є','ж','з'],
+    ['и','і','ї','й','к','л','м','н','о','п'],
+    ['р','с','т','у','ф','х','ц','ч','ш','щ'],
+    ['ь','ю','я']
+  ];
+
+  function renderKeyboard() {
+    const holder = document.getElementById('keyboardRows');
+    if (!holder) return;
+    holder.innerHTML = '';
+    ukrainianKeyboardRows.forEach((row) => {
+      const rowEl = document.createElement('div');
+      rowEl.className = 'keyboard-row';
+      row.forEach((letter) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        const char = keyboardUppercase ? letter.toUpperCase() : letter;
+        button.textContent = char;
+        button.addEventListener('click', () => insertChar(char));
+        rowEl.appendChild(button);
+      });
+      holder.appendChild(rowEl);
+    });
+    const controlRow = document.createElement('div');
+    controlRow.className = 'keyboard-row';
+    const shiftButton = document.createElement('button');
+    shiftButton.type = 'button';
+    shiftButton.className = 'keyboard-wide';
+    shiftButton.textContent = keyboardUppercase ? 'а/А' : 'А/а';
+    shiftButton.addEventListener('click', toggleKeyboardCase);
+    controlRow.appendChild(shiftButton);
+    const spaceButton = document.createElement('button');
+    spaceButton.type = 'button';
+    spaceButton.className = 'keyboard-wide';
+    spaceButton.textContent = 'пробіл';
+    spaceButton.addEventListener('click', () => insertChar(' '));
+    controlRow.appendChild(spaceButton);
+    ['.', ',', '?', '!', '’', '-'].forEach((symbol) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = symbol;
+      button.addEventListener('click', () => insertChar(symbol));
+      controlRow.appendChild(button);
+    });
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'keyboard-wide';
+    deleteButton.textContent = '⌫';
+    deleteButton.addEventListener('click', deleteChar);
+    controlRow.appendChild(deleteButton);
+    holder.appendChild(controlRow);
+  }
+
+  function setActiveTextField(el) { activeTextField = el; }
+  function toggleKeyboard() {
+    const panel = document.getElementById('keyboardPanel');
+    if (!panel) return;
+    panel.classList.toggle('open');
+  }
+  function toggleKeyboardCase() { keyboardUppercase = !keyboardUppercase; renderKeyboard(); }
+  function insertChar(char) {
+    if (!activeTextField) return;
+    const start = activeTextField.selectionStart ?? activeTextField.value.length;
+    const end = activeTextField.selectionEnd ?? activeTextField.value.length;
+    const value = activeTextField.value;
+    activeTextField.value = value.slice(0, start) + char + value.slice(end);
+    activeTextField.focus();
+    activeTextField.selectionStart = activeTextField.selectionEnd = start + char.length;
+    activeTextField.dispatchEvent(new Event('input'));
+  }
+  function deleteChar() {
+    if (!activeTextField) return;
+    const start = activeTextField.selectionStart ?? activeTextField.value.length;
+    const end = activeTextField.selectionEnd ?? activeTextField.value.length;
+    const value = activeTextField.value;
+    if (start !== end) {
+      activeTextField.value = value.slice(0, start) + value.slice(end);
+      activeTextField.selectionStart = activeTextField.selectionEnd = start;
+    } else if (start > 0) {
+      activeTextField.value = value.slice(0, start - 1) + value.slice(end);
+      activeTextField.selectionStart = activeTextField.selectionEnd = start - 1;
+    }
+    activeTextField.focus();
+    activeTextField.dispatchEvent(new Event('input'));
+  }
+  renderKeyboard();
+</script>
+
+</body>
+</html>
